@@ -1,68 +1,4 @@
-// const axios = require("axios");
-// const cheerio = require("cheerio");
-// const Event = require("../models/Event");
 
-// async function scrapeEvents() {
-//   try {
-//     console.log("Starting scraping...");
-
-//     const url = "https://www.eventbrite.com/d/australia--sydney/events/";
-
-//     const { data } = await axios.get(url, {
-//       headers: {
-//         "User-Agent":
-//           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-//       },
-//     });
-
-//     const $ = cheerio.load(data);
-
-//     const eventElements = $("article");
-
-//     if (eventElements.length === 0) {
-//       console.log("No events found on page");
-//       return;
-//     }
-
-//     for (let i = 0; i < eventElements.length; i++) {
-
-//   const el = eventElements[i];
-
-//   const title = $(el).find("h3").text().trim();
-
-//   const date = $(el).find("p").first().text().trim();
-
-//   const link = $(el).find("a").attr("href");
-
-//   const image = $(el).find("img").attr("src");
-
-//   if (!title || title.match(/^\d+\./)) continue;
-
-//   const existingEvent = await Event.findOne({ eventUrl: link });
-
-//   if (existingEvent) continue;
-
-//   await Event.create({
-//     title,
-//     date,
-//     city: "Sydney",
-//     source: "Eventbrite",
-//     eventUrl: link,
-//     image,
-//     lastScrapedAt: new Date(),
-//     status: "new"
-//   });
-
-//   console.log("Saved event:", title);
-// }
-
-//     console.log("Scraping completed successfully");
-//   } catch (error) {
-//     console.error("Scraper error:", error.message);
-//   }
-// }
-
-// module.exports = scrapeEvents;
 
 const puppeteer = require("puppeteer");
 const Event = require("../models/Event");
@@ -75,7 +11,7 @@ async function scrapeEvents() {
 
     browser = await puppeteer.launch({
       headless: "new",
-      executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      // executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
 
